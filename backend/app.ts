@@ -32,10 +32,9 @@ async function charge(account: string, charges: number): Promise<ChargeResult> {
     try {
         const balance = parseInt((await client.get(`${account}/balance`)) ?? "");
         if (balance >= charges) {
-            // let remainingBalance = balance - charges;
-            await client.set(`${account}/balance`, balance - charges);
-            const remainingBalance = parseInt((await client.get(`${account}/balance`)) ?? "");
-            console.log("Reaminaing balance", remainingBalance);
+            let remainingBalance = balance - charges;
+            await client.set(`${account}/balance`, remainingBalance);
+            console.log("Remaining balance", remainingBalance);
             return { isAuthorized: true, remainingBalance , charges };
         } else {
             return { isAuthorized: false, remainingBalance: balance, charges: 0 };
