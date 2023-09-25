@@ -6,6 +6,6 @@ const delay = parseInt(process.env.TCP_DELAY ?? "1000");
 const sleep = () => new Promise((resolve => setTimeout(resolve, delay)));
 
 createProxy(servicePort, [serviceHost], [servicePort], {
-    upstream: (_, data) => sleep().then(() => data),
-    downstream: (_, data) => sleep().then(() => data),
+    upstream: (_, data) => (data),
+    downstream: (_, data) => (data),
 });
